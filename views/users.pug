@@ -1,4 +1,8 @@
 h1 My users
+a(href="/users/create") Add user
+form(action="/users/search", method="GET")
+	input(type="text", name="q")
+	button Submit
 ul= 'List user:'
 	each value, index in users
 		li= index + '. ' + 'Name:' + value.name + '-' + 'Phone:' + value.phone
