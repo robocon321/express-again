@@ -1,7 +1,9 @@
-h1 Create user
-form(action="/users/create", method="POST")
-	label(for="name") Name:
-	input(type="text", name="name")
-	label(for="phone") Phone:
-	input(type="text", name="phone")
-	button Add
+extends ../../common/bootstrap.pug
+block content
+	h1 Create user
+	form(action="/users/create", method="POST")
+		label(for="name") Name:
+		input.form-control#name(type="text", name="name")
+		label(for="phone") Phone:
+		input.form-control#phone(type="text", name="phone")
+		button.btn.btn-primary.mt-2 Add
