@@ -3,6 +3,7 @@ var bodyParser=require('body-parser');
 var app=express();
 
 var userRouter=require('./routers/router.user.js');
+var userAuthentication=require('./routers/router.authentication.js')
 
 var port=3000;
 
@@ -10,7 +11,7 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 
 app.use('/users',userRouter);
-
+app.use('/login',userAuthentication);
 app.get('/',function(req,res){
 	res.render('index',{
 		name:"Robocon321#"

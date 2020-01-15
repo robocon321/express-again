@@ -1,9 +1,12 @@
 extends ../../common/bootstrap.pug
 block content
 	h1 Create user
+	if errs
+		each err in errs
+			p.alert.alert-danger=err
 	form(action="/users/create", method="POST")
 		label(for="name") Name:
-		input.form-control#name(type="text", name="name")
+		input.form-control#name(type="text", name="name", value= name)
 		label(for="phone") Phone:
-		input.form-control#phone(type="text", name="phone")
+		input.form-control#phone(type="text", name="phone", value= phone)
 		button.btn.btn-primary.mt-2 Add

@@ -1,0 +1,12 @@
+extends ../../common/bootstrap.pug
+block content
+	h1 Authencation
+	if errs
+		each err in errs
+			div.alert.alert-danger=err
+	form(action="/login", method="POST")
+		label(for="username") Username:
+		input.form-control#username(type="text", name="username", value=username)
+		label(for="password") Password:
+		input.form-control#password(type="text", name="password", value=password)
+		button.btn.btn-primary.mt-2 Login

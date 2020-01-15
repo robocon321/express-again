@@ -22,31 +22,31 @@ module.exports.getCreate=function(req,res){
 
 module.exports.postCreate=function(req,res){
 	var errs=[];
-	var user={
-		name:req.body.name,
-		phone:req.body.phone,
-		id:shortid.generate()
-	}
 	if(req.body.name==""){
 		errs.push("Don't required your name")
-	}else if(req.body.phone==""){
+	}
+	if(req.body.phone==""){
 		errs.push("Don't required your phone")
 	}
 	if(errs.length>0){
-		res.render('/users/create',{
+		res.render('../views/users/create.pug',{
 			errs:errs,
-			user:user
+			name:req.body.name,
+			phone:req.body.phone
 		})
 		return;
 	}
-	db.get('users').push({user}).write();
+	db.get('users').push({	name:req.body.name,
+							phone:req.body.phone,
+							id:shortid.generate()
+	}).write();
 	res.redirect('/users');
 }
 
 module.exports.findID=function(req,res){
 	var id=req.params.id;
 	var user=db.get('users').find({id:id}).value();
-	res.render('users/user',{
+	res.render('../views/users/user.pug',{
 		user:user
 	})
 }
