@@ -1,18 +1,19 @@
 var db=require('../db.js');
+var md5=require('md5');
 
 module.exports.getAuthentication=function(req,res,next){
-	if(req.cookies.name){
+	res.locals.name=req.cookies.username ? req.cookies.username : "R#" ;
+	if(req.cookies.username){
 		next();
 		return;
-	}else {
-		res.render('../views/users/authentication.pug');
 	}
+	res.render('../views/users/authentication.pug');
 }
 
 module.exports.postAuthentication=function(req,res,next){
 	var errs=[];
 	var username=req.body.username;
-	var password=req.body.password;
+	var password=md5(req.body.password);
 
 	if(!username){
 		errs.push("Don't required username");
@@ -36,12 +37,13 @@ module.exports.postAuthentication=function(req,res,next){
 		res.render('../views/users/authentication.pug',{
 			errs:errs,
 			username:username,
-			password:password
+			password:req.body.password
 		});
 		return ;
 	}
 
 	res.cookie('username', username);
 	res.cookie('password', password);
-	next();
+	res.redirect('/users');
+	return;
 }
