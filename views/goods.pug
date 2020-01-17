@@ -10,7 +10,7 @@ block content
             .card-body
               h5.card-title=(20*(page-1)+index+1)+"."+item.name
               p.card-text=item.content
-              a.btn.btn-primary(href='#') Add to cart
+              a.btn.btn-primary(href='/goods/add-to-cart?id='+item.id) Add to cart
   nav(aria-label='Page navigation')
     ul.pagination.pagination-sm.justify-content-center.mt-4
       if page<=1

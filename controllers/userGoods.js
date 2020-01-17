@@ -17,5 +17,17 @@ module.exports.getGoods=function(req,res){
 }
 
 module.exports.addToCart=function(req,res){
-
+	var itemCart=db.get('cart').find({id:req.query.id}).value();
+	console.log(itemCart);
+	if(!itemCart){
+		console.log("Don't have Item")
+		db.get('cart').push({
+			id:req.query.id,
+			count:0
+		}).write();
+	}else {
+		console.log("Have item");
+		db.get('cart').find({id:req.query.id}).set("count",itemCart.count+1).write();
+	}
+	res.redirect('/goods/');
 }
