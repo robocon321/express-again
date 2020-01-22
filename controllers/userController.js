@@ -2,20 +2,7 @@ var express=require('express');
 var shortid=require('shortid');
 var db=require('../db.js');
 var mongoose=require('../mongoose.js');
-var users;
-
-var userSchema=new mongoose.Schema({
-	name:String,
-	phone:String,
-	id:String
-});
-
-var userModel=mongoose.model("User",userSchema,"users");
-userModel.find().then(function(data){
-	users=data;
-});
-
-userModel.collection.insert
+var users=db.get('users').value();
 
 module.exports.index=function(req,res){
 	res.render('users',{users:users})
