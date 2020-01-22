@@ -7,7 +7,7 @@ var userRouter=require('./routers/router.user.js');
 var userAuthentication=require('./routers/router.authentication.js');
 var userGoods=require('./routers/router.goods.js');
 
-var port=3000;
+var port=process.env.PORT || 3000;
 
 app.set('view engine', 'pug');
 app.set('views', './views');
