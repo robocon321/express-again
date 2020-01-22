@@ -4,9 +4,10 @@ block content
 	if errs
 		each err in errs
 			p.alert.alert-danger=err
-	form(action="/users/create", method="POST")
+	form(action="/users/create", method="POST", enctype="multipart/form-data")
 		label(for="name") Name:
 		input.form-control#name(type="text", name="name", value= name)
 		label(for="phone") Phone:
 		input.form-control#phone(type="text", name="phone", value= phone)
+		input.form-control#image(type="file", name="image")
 		button.btn.btn-primary.mt-2 Add

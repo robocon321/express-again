@@ -1,8 +1,21 @@
 var express=require('express');
 var shortid=require('shortid');
 var db=require('../db.js');
+var mongoose=require('../mongoose.js');
+var users;
 
-var users=db.get('users').value();
+var userSchema=new mongoose.Schema({
+	name:String,
+	phone:String,
+	id:String
+});
+
+var userModel=mongoose.model("User",userSchema,"users");
+userModel.find().then(function(data){
+	users=data;
+});
+
+userModel.collection.insert
 
 module.exports.index=function(req,res){
 	res.render('users',{users:users})
@@ -36,9 +49,12 @@ module.exports.postCreate=function(req,res){
 		})
 		return;
 	}
+	var path='.'+req.file.destination.slice(8)+'/'+req.file.filename;
+
 	db.get('users').push({	name:req.body.name,
 							phone:req.body.phone,
-							id:shortid.generate()
+							id:shortid.generate(),
+							path:path
 	}).write();
 	res.redirect('/users');
 }

@@ -6,11 +6,14 @@ block content
 		input.form-control(type="text", name="q")
 		button.btn.btn-primary Submit
 	table.table
+		th Image
 		th Name
 		th Phone
 		th Link
 			each value, index in users
 				tr
+					td
+						img(src=value.path, alt="No image")
 					td=value.name
 					td=value.phone
 					td

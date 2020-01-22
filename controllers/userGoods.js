@@ -23,7 +23,7 @@ module.exports.addToCart=function(req,res){
 		console.log("Don't have Item")
 		db.get('cart').push({
 			id:req.query.id,
-			count:0
+			count:1
 		}).write();
 	}else {
 		console.log("Have item");

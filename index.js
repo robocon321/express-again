@@ -1,5 +1,6 @@
 var express=require('express');
 var bodyParser=require('body-parser');
+var dotenv=require('dotenv').config();
 var app=express();
 
 var userRouter=require('./routers/router.user.js');
@@ -14,6 +15,7 @@ app.set('views', './views');
 app.use('/users',userRouter);
 app.use('/login',userAuthentication);
 app.use('/goods',userGoods);
+app.use(express.static('public'));
 
 app.get('/',function(req,res){
 	res.render('index',{
