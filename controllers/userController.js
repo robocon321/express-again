@@ -1,7 +1,6 @@
 var express=require('express');
 var shortid=require('shortid');
 var db=require('../db.js');
-var mongoose=require('../mongoose.js');
 var users=db.get('users').value();
 
 module.exports.index=function(req,res){
